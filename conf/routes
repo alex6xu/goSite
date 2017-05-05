@@ -6,8 +6,11 @@
 module:testrunner
 # module:jobs
 
-
 GET     /                                       App.Index
+GET     /blog/                                  Blog.Index
+GET     /blog/:id                               Blog.Detail
+GET     /blog/edit/:id                          Blog.Edit
+GET     /blog/add                               Blog.Add
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

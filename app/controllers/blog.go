@@ -12,11 +12,11 @@ func (c Blog) Index() revel.Result {
 	return c.Render()
 }
 
-func (c Blog) Edit() revel.Result {
+func (c Blog) Edit(id int) revel.Result {
 	return c.Render()
 }
 
-func (c Blog) Detail() revel.Result {
+func (c Blog) Detail(id int) revel.Result {
 	return c.Render()
 }
 
