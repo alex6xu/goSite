@@ -6,6 +6,34 @@
     <div class="row">
       <h1>It works!</h1>
       <p></p>
+      <form action="/register" method="post">
+        {{with $field := field "user.Username" .}}
+          <p class="{{$field.ErrorClass}}">
+            <strong>Username:</strong>
+            <input type="text" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> *
+            <span class="error">{{$field.Error}}</span>
+          </p>
+        {{end}}
+        {{with $field := field "user.Name" .}}
+          <p class="{{$field.ErrorClass}}">
+            <strong>Real name:</strong> <input type="text" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> *
+            <span class="error">{{$field.Error}}</span>
+          </p>
+        {{end}}
+        {{with $field := field "user.Password" .}}
+          <p class="{{$field.ErrorClass}}">
+            <strong>Password:</strong> <input type="password" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> *
+            <span class="error">{{$field.Error}}</span>
+          </p>
+        {{end}}
+        {{with $field := field "verifyPassword" .}}
+          <p class="{{$field.ErrorClass}}">
+            <strong>Verify password:</strong> <input type="password" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> *
+            <span class="error">{{$field.Error}}</span>
+          </p>
+        {{end}}
+        <button type="submit">提交</button>
+      </form>
     </div>
   </div>
 </header>

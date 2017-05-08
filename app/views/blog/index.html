@@ -64,11 +64,14 @@
 <!-- header -->
 <!-- content -->
 	<div class="content">
+
 	<div class="container">
 		<div class="content-text">	
 			<div class="title">
 				<div class="some-title">
-					<h3><a href="single.html">Some Tittle Goes Here</a></h3>
+				{{if .flash.success}}
+			        <h3>{{.flash.success}}</h3>
+				{{end}}
 				</div>
 				<div class="john">
 					<p><a href="#">John Doe</a><span>May.26.2011</span></p>

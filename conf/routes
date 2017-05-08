@@ -7,6 +7,9 @@ module:testrunner
 # module:jobs
 
 GET     /                                       App.Index
+
+POST    /login                                  App.Login
+POST    /register                               App.Register
 GET     /blog/                                  Blog.Index
 GET     /blog/add/                              Blog.Add
 GET     /blog/:id                               Blog.Detail

@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"github.com/revel/revel"
+	// "letsgo/app/models"
 )
 
 type Blog struct {
-	*revel.Controller
+	GorpController
 }
 
 func (c Blog) Index() revel.Result {
@@ -23,3 +24,12 @@ func (c Blog) Detail(id int) revel.Result {
 func (c Blog) Add() revel.Result {
 	return c.Render()
 }
+
+func (c Blog) Review() revel.Result {
+	return c.Render()
+}
+
+func (c Blog) List() revel.Result {
+	return c.Render()
+}
+
