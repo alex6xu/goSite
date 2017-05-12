@@ -7,10 +7,11 @@ module:testrunner
 # module:jobs
 
 GET     /                                       App.Index
-
+GET     /profile                                App.Profile
 POST    /login                                  App.Login
 POST    /register                               App.Register
 GET     /blog/                                  Blog.Index
+GET     /blog/list                              Blog.List
 GET     /blog/add/                              Blog.Add
 GET     /blog/:id                               Blog.Detail
 GET     /blog/edit/:id                          Blog.Edit

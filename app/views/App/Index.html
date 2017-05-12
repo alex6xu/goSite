@@ -4,8 +4,27 @@
 <header class="jumbotron" style="background-color:#A9F16C">
   <div class="container">
     <div class="row">
-      <h1>It works!</h1>
-      <p></p>
+      <h1>Working homepage!</h1>
+      <form action="{{url "App.Login"}}" id="formLogin" method="POST">
+        <p class="field">
+          <label>Login Name:</label>
+          <input type="text" name="username" size="19" value="{{.flash.username}}" />
+        </p>
+        <p class="field">
+          <label>Password:</label>
+          <input type="password" name="password" size="19"/>
+        </p>
+        <p class="field">
+          <label>Remember:</label>
+          <input type="checkbox" name="remember" value="true"/>
+        </p>
+        <p class="buttons">
+          <input type="submit" value="Account login" />
+        </p>
+      </form>
+
+      <p>register</p>
+
       <form action="/register" method="post">
         {{with $field := field "user.Username" .}}
           <p class="{{$field.ErrorClass}}">
@@ -16,6 +35,7 @@
         {{end}}
         {{with $field := field "user.Name" .}}
           <p class="{{$field.ErrorClass}}">
+            <!-- <strong>Real name:</strong> <input type="text" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> * -->
             <strong>Real name:</strong> <input type="text" name="{{$field.Name}}" size="16" value="{{$field.Flash}}"> *
             <span class="error">{{$field.Error}}</span>
           </p>
