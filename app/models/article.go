@@ -13,18 +13,18 @@ type Review_Article struct {
 }
 
 type Review struct {
-	Id			int
+	Id				int
 	User			int
 	Content			string
 
 }
 
 type Article struct {
-	Id             		int
+	Id             			int
 	DateCreated             string
 	DateUpdated             string
-	title			string
-	content     		string
+	title					string
+	content     			string
 
 }
 
