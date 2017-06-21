@@ -9,7 +9,7 @@ import (
 type PageView struct {
 	Id 				int
 	Hits            int
-	Datetime        int64
+	Date        	string
 	Url				string
 	HostIp          string
 }

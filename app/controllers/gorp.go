@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	
+	"os"
 	"database/sql"
     
     "golang.org/x/crypto/bcrypt"
@@ -12,6 +12,7 @@ import (
 	"github.com/revel/modules/db/app"
 
     "letsgo/app/models"
+	"fmt"
 )
 
 var (
@@ -22,26 +23,39 @@ func InitDB() {
 	db.Init()
 	Dbm = &gorp.DbMap{Db: db.Db, Dialect: gorp.SqliteDialect{}}
 
-	setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
-		for col, size := range colSizes {
-			t.ColMap(col).MaxSize = size
+	_, err := os.Stat("data.sqlite3")
+	if err != nil {
+		fmt.Printf("no data saved! new")
+		setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
+			for col, size := range colSizes {
+				t.ColMap(col).MaxSize = size
+			}
+		}
+
+		t := Dbm.AddTable(models.User{}).SetKeys(true, "UserId")
+		t.ColMap("Password").Transient = true
+		setColumnSizes(t, map[string]int{
+			"Username": 20,
+			"Name":     100,
+		})
+
+		t = Dbm.AddTable(models.PageView{}).SetKeys(true, "Id")
+		setColumnSizes(t, map[string]int{
+			"Hits":		32,
+			"Date":    	32,
+			"Url":		200,
+			"HostIp":   32,
+		})
+
+		Dbm.TraceOn("[gorp]", r.INFO)
+		Dbm.CreateTables()
+
+		bcryptPassword, _ := bcrypt.GenerateFromPassword([]byte("demo"), bcrypt.DefaultCost)
+		demoUser := &models.User{0, "Demo User", "demo", "demo", bcryptPassword}
+		if err := Dbm.Insert(demoUser); err != nil {
+			panic(err)
 		}
 	}
-
-	t := Dbm.AddTable(models.User{}).SetKeys(true, "UserId")
-	t.ColMap("Password").Transient = true
-	setColumnSizes(t, map[string]int{
-		"Username": 20,
-		"Name":     100,
-	})
-
-	 t = Dbm.AddTable(models.PageView{}).SetKeys(true, "Id")
-	 setColumnSizes(t, map[string]int{
-		 "Hits":		32,
-		 "Datetime":    64,
-		 "Url":			200,
-		 "HostIp":      32,
-	 })
 
 	// t = Dbm.AddTable(models.Booking{}).SetKeys(true, "BookingId")
 	// t.ColMap("User").Transient = true
@@ -52,16 +66,6 @@ func InitDB() {
 	// 	"CardNumber": 16,
 	// 	"NameOnCard": 50,
 	// })
-
-	Dbm.TraceOn("[gorp]", r.INFO)
-	Dbm.CreateTables()
-
-	bcryptPassword, _ := bcrypt.GenerateFromPassword(
-		[]byte("demo"), bcrypt.DefaultCost)
-	demoUser := &models.User{0, "Demo User", "demo", "demo", bcryptPassword}
-	if err := Dbm.Insert(demoUser); err != nil {
-		panic(err)
-	}
 
 	// hotels := []*models.Hotel{
 	// 	&models.Hotel{0, "Marriott Courtyard", "Tower Pl, Buckhead", "Atlanta", "GA", "30305", "USA", 120},
