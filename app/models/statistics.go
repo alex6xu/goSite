@@ -1,15 +1,15 @@
 package models
 
 import (
-"fmt"
+	//"fmt"
 //"github.com/revel/revel"
 //"regexp"
 )
 
 type PageView struct {
 	Id 				int
-	hits            int
-	Datetime        string
-	url				string
-	ip              string
+	Hits            int
+	Datetime        int64
+	Url				string
+	HostIp          string
 }

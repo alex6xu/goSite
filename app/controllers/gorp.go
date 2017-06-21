@@ -35,15 +35,13 @@ func InitDB() {
 		"Name":     100,
 	})
 
-	// t = Dbm.AddTable(models.Hotel{}).SetKeys(true, "HotelId")
-	// setColumnSizes(t, map[string]int{
-	// 	"Name":    50,
-	// 	"Address": 100,
-	// 	"City":    40,
-	// 	"State":   6,
-	// 	"Zip":     6,
-	// 	"Country": 40,
-	// })
+	 t = Dbm.AddTable(models.PageView{}).SetKeys(true, "Id")
+	 setColumnSizes(t, map[string]int{
+		 "Hits":		32,
+		 "Datetime":    64,
+		 "Url":			200,
+		 "HostIp":      32,
+	 })
 
 	// t = Dbm.AddTable(models.Booking{}).SetKeys(true, "BookingId")
 	// t.ColMap("User").Transient = true
