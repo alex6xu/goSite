@@ -12,7 +12,7 @@ import (
 	"github.com/revel/modules/db/app"
 
     "letsgo/app/models"
-	"fmt"
+	//"fmt"
 )
 
 var (
@@ -23,33 +23,32 @@ func InitDB() {
 	db.Init()
 	Dbm = &gorp.DbMap{Db: db.Db, Dialect: gorp.SqliteDialect{}}
 
-	_, err := os.Stat("data.sqlite3")
-	if err != nil {
-		fmt.Printf("no data saved! new")
-		setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
-			for col, size := range colSizes {
-				t.ColMap(col).MaxSize = size
-			}
+	setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
+		for col, size := range colSizes {
+			t.ColMap(col).MaxSize = size
 		}
+	}
 
-		t := Dbm.AddTable(models.User{}).SetKeys(true, "UserId")
-		t.ColMap("Password").Transient = true
-		setColumnSizes(t, map[string]int{
-			"Username": 20,
-			"Name":     100,
-		})
+	t := Dbm.AddTable(models.User{}).SetKeys(true, "UserId")
+	t.ColMap("Password").Transient = true
+	setColumnSizes(t, map[string]int{
+		"Username": 20,
+		"Name":     100,
+	})
 
-		t = Dbm.AddTable(models.PageView{}).SetKeys(true, "Id")
-		setColumnSizes(t, map[string]int{
-			"Hits":		32,
-			"Date":    	32,
-			"Url":		200,
-			"HostIp":   32,
-		})
+	t = Dbm.AddTable(models.PageView{}).SetKeys(true, "Id")
+	setColumnSizes(t, map[string]int{
+		"Hits":		32,
+		"Date":    	32,
+		"Url":		200,
+		"HostIp":   32,
+	})
 
-		Dbm.TraceOn("[gorp]", r.INFO)
-		Dbm.CreateTables()
+	Dbm.TraceOn("[gorp]", r.INFO)
+	Dbm.CreateTables()
 
+	_, err := os.Stat("data_sqlite3")
+	if err != nil{
 		bcryptPassword, _ := bcrypt.GenerateFromPassword([]byte("demo"), bcrypt.DefaultCost)
 		demoUser := &models.User{0, "Demo User", "demo", "demo", bcryptPassword}
 		if err := Dbm.Insert(demoUser); err != nil {

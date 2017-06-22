@@ -119,7 +119,11 @@
             
                 <div class="templatemo_right_section">
                     <h2>About This Blog</h2>
-                    <p>This free web blog layout is provided by <a href="http://www.templatemo.com" target="_parent">TemplateMo.com</a>. You may download, modify and apply this layout for any blog CMS websites.</p>
+                    <!--<p>provide <a href="http://www.templatemo.com" target="_parent">TemplateMo.com</a></p>-->
+                    <p>今日浏览量:   <span style="color:red">{{.today_visits}}</span></p>
+                    <p>总浏览量:  {{.all_visits}}</p>
+                    <p>当前页面今日浏览量:{{.page_visits_today}}</p>
+                    <p>当前页面总浏览量:  {{.this_page_visits}}</p>
                 </div>
             
             	<div class="templatemo_right_section">

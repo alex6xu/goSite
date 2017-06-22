@@ -5,6 +5,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"letsgo/app/models"
 	"letsgo/app/routes"
+	"fmt"
 )
 
 type App struct {
@@ -23,7 +24,13 @@ func (c App) getUser(username string) *models.User {
 }
 
 func (c App) Index() revel.Result {
-	return c.Render()
+	fmt.Print("index start")
+	all_visits := "123"
+	today_visits := "23"
+	this_page_visits := "12"
+	page_visits_today := "2"
+	
+	return c.Render(all_visits, today_visits, this_page_visits, page_visits_today)
 }
 
 func (c App) Login(username, password string, remember bool) revel.Result {

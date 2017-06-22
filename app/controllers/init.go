@@ -5,6 +5,7 @@ import (
 	"letsgo/app/models"
 	"time"
 	//"fmt"
+	"fmt"
 )
 
 
@@ -29,11 +30,14 @@ func recordRequest(c *revel.Controller) revel.Result {
 	//fmt.Printf(tday)
 	page := &models.PageView{}
 	err := Dbm.SelectOne(&page, "select * from PageView where Url = ? and Date = ?", c.Request.URL.Path, tday)
-	//fmt.Printf("page is %s,  err is %s", page, err)
+	fmt.Printf("page is %s,  err is %s\n", page, err)
+	fmt.Println(err != nil)
 	if err != nil {
+		fmt.Print("no record found")
 		page = &models.PageView{
-			0, 1, tday, c.Request.URL.Path, c.Request.Host,
+			0, 1, tday, c.Request.URL.Path, c.Request.RemoteAddr,
 		}
+		fmt.Print(page)
 		Dbm.Insert(page)
 		return nil
 	}
