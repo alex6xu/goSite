@@ -44,6 +44,15 @@ func InitDB() {
 		"HostIp":   32,
 	})
 
+	t = Dbm.AddTable(models.Article{}).SetKeys(true, "Id")
+	setColumnSizes(t, map[string]int{
+		"Id":             		32,
+		"DateCreated":          32,
+		"DateUpdated":          32,
+		"title":				128,
+		"content":     			10240,
+	})
+
 	Dbm.TraceOn("[gorp]", r.INFO)
 	Dbm.CreateTables()
 
