@@ -5,7 +5,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"letsgo/app/models"
 	"letsgo/app/routes"
-	"fmt"
+	//"fmt"
+	"log"
+	"time"
 )
 
 type App struct {
@@ -24,11 +26,18 @@ func (c App) getUser(username string) *models.User {
 }
 
 func (c App) Index() revel.Result {
-	fmt.Print("index start")
-	all_visits := "123"
-	today_visits := "23"
-	this_page_visits := "12"
-	page_visits_today := "2"
+	//fmt.Print("index start")
+	result1, err := Dbm.SelectInt("select sum(hits) from PageView ")
+	result2, err := Dbm.SelectInt("select sum(hits) from PageView where Date = ?", time.Now().Format("2006-01-02"))
+	result3, err := Dbm.SelectInt("select sum(hits) from PageView where Url = ?", c.Request.URL.Path)
+	result4, err := Dbm.SelectInt("select sum(hits) from PageView where Date = ? and Url =?", time.Now().Format("2006-01-02"), c.Request.URL.Path)
+	checkErr(err, "database error!")
+	//fmt.Print(tdy, err)
+	//fmt.Print(tdy)
+	all_visits := result1
+	today_visits := result2
+	this_page_visits := result3
+	page_visits_today := result4
 	
 	return c.Render(all_visits, today_visits, this_page_visits, page_visits_today)
 }
@@ -80,4 +89,10 @@ func (c App) Register(user models.User, verifyPassword string) revel.Result {
 
 func (c App) Profile() revel.Result {
 	return c.Render()
+}
+
+func checkErr(err error, msg string) {
+	if err != nil {
+		log.Fatalln(msg, err)
+	}
 }
