@@ -2,8 +2,7 @@ package models
 
 import (
 	"fmt"
-	//"github.com/revel/revel"
-	//"regexp"
+	//"time"
 )
 
 type Review_Article struct {
@@ -23,17 +22,17 @@ type Article struct {
 	Id             			int
 	DateCreated             string
 	DateUpdated             string
-	title					string
-	content     			string
+	Title					string
+	Content     			string
 
 }
 
 func (a *Article) String() string {
-	return fmt.Sprintf("Title(%s)", a.title)
+	return fmt.Sprintf("Title(%s)", a.Title)
 }
 
 func (a *Article) Preview() string {
-	return fmt.Sprint("%s", a.content[100])
+	return fmt.Sprint("%s", a.Content[100])
 }
 
 //var userRegex = regexp.MustCompile("^\\w*$")

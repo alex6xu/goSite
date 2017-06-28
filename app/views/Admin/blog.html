@@ -29,10 +29,10 @@
     <div id="templatemo_menu_panel">
     	<div id="templatemo_menu_section">
             <ul>
-                <li><a href="#">主页</a></li>
-                <li><a href="/blog/" class="current">个人博客</a></li>
-                <li><a href="#templatemo_content_left">照片娱乐</a></li>
-                <li><a href="/form/">休闲论坛</a></li>
+                <li><a href="/"  class="current">主页</a></li>
+                <li><a href="/blog/">个人博客</a></li>
+                <li><a href="#templatemo_content_left">近期照片</a></li>
+                <li><a href="/forum/">休闲娱乐</a></li>
                 <li><a href="#">成长历程</a></li>
                 <li><a href="#">Contact</a></li>                     
             </ul> 
@@ -42,24 +42,18 @@
 	<div id="templatemo_content_container">
         <div id="templatemo_content">
             <div id="templatemo_content_left">
-                {{range .list}}
+				
                 <div class="templatemo_post">
-                    <div class="post_title">
-                        {{.Title}}
-                    </div>
+                	<form action="/admin/article/add" method="post">
+                        <input name="title"/>
+                        <textarea rows="" cols="" name="content">
 
-                    <div class="post_body">
-                        {{.Content | html}}
-                        <!--<img src="/public/images/templatemo_image_1.jpg" alt="Free CSS" />-->
-                        <!--<p>Credits go to <a href="http://www.bittbox.com/freebies/free-hi-resolution-wood-textures/" target="_blank">bittbox.com</a> for the texture and <a href="http://flickr.com/photos/sawhtoo/" target="_blank">SawII</a> for photos.</p>-->
-                        <!--<p>Fusce non lacus et lorem ornare interdum. Nunc eget urna. Mauris vestibulum felis eget tortor. Praesent mattis varius quam. Vestibulum ullamcorper ipsum nec augue. Vestibulum auctor odio eget ante. </p>-->
-                        <!--<p>Nunc commodo, magna pharetra semper vehicula, dui ligula feugiat elit, et euismod nunc orci ut libero. Etiam sodales massa vel metus. Mauris et elit quis mauris aliquet luctus.</p>-->
-                    </div>
-                    <div class="post_comment">
-                        <!--<a href="#">comment}}</a>-->
-                    </div>
-                </div> <!-- end of post two -->
-                {{end}}
+                        </textarea>
+                        <input type="submit" value="submit"/>
+                    </form>
+                </div> <!-- end of one post -->
+                
+
 
                 
             </div> <!-- end of content left -->

@@ -49,12 +49,12 @@ func InitDB() {
 		"Id":             		32,
 		"DateCreated":          32,
 		"DateUpdated":          32,
-		"title":				128,
-		"content":     			10240,
+		"Title":				128,
+		"Content":     			10240,
 	})
 
 	Dbm.TraceOn("[gorp]", r.INFO)
-	Dbm.CreateTables()
+	Dbm.CreateTablesIfNotExists()
 
 	_, err := os.Stat("data_sqlite3")
 	if err != nil{

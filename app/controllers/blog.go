@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"github.com/revel/revel"
-	// "letsgo/app/models"
 	"letsgo/app/models"
 	"log"
+	"fmt"
 )
 
 type Blog struct {
@@ -38,6 +38,13 @@ func (c Blog) Review() revel.Result {
 }
 
 func (c Blog) List() revel.Result {
-	return c.Render()
+
+	list, err := Dbm.Select(models.Article{}, "select * from Article")
+	if err != nil{
+		fmt.Print(err)
+		return c.Render()
+	}
+	fmt.Print(list[0])
+	return c.Render(list)
 }
 
