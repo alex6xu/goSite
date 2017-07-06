@@ -9,6 +9,16 @@
 <link rel="stylesheet" type="text/css" href="/public/contentslider.css" />
 <script type="text/javascript" src="/public/contentslider.js">
 </script>
+<script type="text/javascript" src="/public/tinymce/js/tinymce/tinymce.min.js"></script>
+<!--<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=c6vkmodxv1i3hfviyipv7js1h3c30ew4gzxgg6uhyqetj76v"></script>-->
+<script>
+    tinymce.init({
+        selector: '#article_content',
+        skin:'custom',
+        theme: 'modern',
+        language: 'zh_CN'
+    });
+</script>
 </head>
 <body>
 	<div id="templatemo_header_panel">
@@ -45,10 +55,16 @@
 				
                 <div class="templatemo_post">
                 	<form action="/admin/article/add" method="post">
-                        <input name="title"/>
-                        <textarea rows="" cols="" name="content">
+                        <div>
+                            <label>标题</label>
+                            <input name="title"/>
+                        </div>
+                        <div>
+                        <label>正文</label>
+                        <textarea id="article_content" name="content">
 
                         </textarea>
+                        </div>
                         <input type="submit" value="submit"/>
                     </form>
                 </div> <!-- end of one post -->

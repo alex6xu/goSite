@@ -45,7 +45,9 @@
                 {{range .list}}
                 <div class="templatemo_post">
                     <div class="post_title">
-                        {{.Title}}
+                        <a href="/blog/{{.Id}}">
+                            {{.Title}}
+                        </a>
                     </div>
 
                     <div class="post_body">
