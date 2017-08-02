@@ -5,18 +5,6 @@ import (
 	//"time"
 )
 
-type Review_Article struct {
-	Article			int
-	Review			int
-
-}
-
-type Review struct {
-	Id				int
-	User			int
-	Content			string
-
-}
 
 type Article struct {
 	Id             			int

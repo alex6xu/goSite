@@ -57,12 +57,15 @@
                 	<form action="/admin/article/add" method="post">
                         <div>
                             <label>标题</label>
-                            <input name="title"/>
+                            {{with $field:=field "article.title" .}}
+                            <input name="{{$field.Name}}" value="{{$field.Flash}}" />
+                            {{end}}吧·
                         </div>
                         <div>
                         <label>正文</label>
-                        <textarea id="article_content" name="content">
-
+                        {{with $field := field "article.content"}}
+                        <textarea id="article_content" name="{{$field.Name}}" value="{{$field.Flash}}">
+                        {{end}}
                         </textarea>
                         </div>
                         <input type="submit" value="submit"/>

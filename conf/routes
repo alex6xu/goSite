@@ -17,7 +17,7 @@ GET     /blog/list                              Blog.List
 GET     /blog/add/                              Blog.Add
 GET     /blog/:id                               Blog.Detail
 GET     /blog/edit/:id                          Blog.Edit
-GET     /forum/                                  Forum.Index
+GET     /forum/                                 Forum.Index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
